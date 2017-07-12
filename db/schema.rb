@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711224447) do
+ActiveRecord::Schema.define(version: 20170712024203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,10 @@ ActiveRecord::Schema.define(version: 20170711224447) do
     t.string "log_line", limit: 256, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "users_id", null: false
-    t.bigint "lists_id", null: false
-    t.index ["lists_id"], name: "index_logs_on_lists_id"
-    t.index ["users_id"], name: "index_logs_on_users_id"
+    t.bigint "user_id", null: false
+    t.bigint "list_id", null: false
+    t.index ["list_id"], name: "index_logs_on_list_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
 # Could not dump table "permissions" because of following StandardError
@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(version: 20170711224447) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "users_id"
-    t.index ["users_id"], name: "index_posts_on_users_id"
+    t.bigint "user_id", null: false
+    t.bigint "list_id", null: false
+    t.index ["list_id"], name: "index_posts_on_list_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,9 +49,10 @@ ActiveRecord::Schema.define(version: 20170711224447) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "logs", "lists", column: "lists_id"
-  add_foreign_key "logs", "users", column: "users_id"
-  add_foreign_key "permissions", "lists", column: "lists_id"
-  add_foreign_key "permissions", "users", column: "users_id"
-  add_foreign_key "posts", "users", column: "users_id"
+  add_foreign_key "logs", "lists"
+  add_foreign_key "logs", "users"
+  add_foreign_key "permissions", "lists"
+  add_foreign_key "permissions", "users"
+  add_foreign_key "posts", "lists"
+  add_foreign_key "posts", "users"
 end
