@@ -52,11 +52,12 @@ end
 
 # **** lists ****
 get '/lists/new/?' do
-  haml :new_list
+  render_view 'lists/new'
 end
 
 post '/lists/new' do
   user = User.find(session[:user_id])
-  List.new_list(params[:title], params[:items], user)
-  redirect request.referer
+  list = List.new_list(params[:name], params[:shared_with], user)
+  # redirect request.referer
+  redirect '/'
 end

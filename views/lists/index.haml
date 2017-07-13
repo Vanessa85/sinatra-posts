@@ -16,6 +16,9 @@
         %tr
           %td
             %a{href: "lists/#{list.id}"}=list.name
+          %td=list.shared_with
+          %td=list.created_at
+          %td=list.updated_at
       - if @lists.length == 0
         %tr
           %td.text-center{colspan: 4} No records
