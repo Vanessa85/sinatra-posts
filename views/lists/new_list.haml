@@ -1,0 +1,16 @@
+.col-md-8.col-md-offset-2
+  .panel.panel-primary
+    .panel-heading
+      %h3.panel-title Create List
+    .panel-body
+      %form{name: 'list', method: 'post', action: '/new'}
+        .form-group
+          %label{for: 'name'} List Name
+          %input.form-control{type: 'text', name: 'name', id: 'name', required: ''}
+        .form-group
+          %label{for: 'shared_with'} Level
+          %select.form-control{name: 'shared_with', id: 'shared_with', required: ''}
+            %option{value: 'PRIVATE'} PRIVATE
+            %option{value: 'SHARED'} SHARED
+            %option{value: 'PUBLIC'} PUBLIC
+        %button.btn.btn-primary{type: 'submit'} Create

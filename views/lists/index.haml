@@ -1,0 +1,21 @@
+.col-md-8.col-md-offset-2
+  %h1
+    Lists
+    %span.small
+      %a{href: '/lists/new', title: 'New List'} New
+
+  %table.table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Shared with
+        %th Created at
+        %th Updated at
+    %tbody
+      - @lists.each do |list|
+        %tr
+          %td
+            %a{href: "lists/#{list.id}"}=list.name
+      - if @lists.length == 0
+        %tr
+          %td.text-center{colspan: 4} No records
