@@ -1,0 +1,21 @@
+.col-md-12
+  .page-header
+    %h1
+      Users
+      %small index
+
+  %table.table.table-condensed.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Created at
+        %th Updated at
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.created_at
+          %td= user.updated_at
+      - if @users.length == 0
+        %tr
+          %td.text-center{colspan: 4} No records

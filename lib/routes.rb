@@ -50,6 +50,12 @@ get '/logout' do
   redirect '/login'
 end
 
+# **** users ****
+get '/users' do
+  @users = User.where.not(id: session[:user_id])
+  render_view '/users/index'
+end
+
 # **** lists ****
 get '/lists/new/?' do
   render_view 'lists/new'

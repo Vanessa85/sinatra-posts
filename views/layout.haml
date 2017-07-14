@@ -31,17 +31,16 @@
                       %a{href: '/users'} Users
                     %li
                       %a{href: '/'} Lists
-                - unless session[:user_id].nil?
-                  %ul.nav.navbar-nav.navbar-right
-                    %li.dropdown
-                      %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button'}
-                        = User.find(session[:user_id]).name
-                        %span.caret
-                      %ul.dropdown-menu
-                        %li
-                          %a{href: '/logout'} Logout
+                  - unless session[:user_id].nil?
+                    %ul.nav.navbar-nav.navbar-right
+                      %li.dropdown
+                        %a.dropdown-toggle{href: '#', 'data-toggle': 'dropdown', role: 'button'}
+                          = User.find(session[:user_id]).name
+                          %span.caret
+                        %ul.dropdown-menu
+                          %li
+                            %a{href: '/logout'} Logout
 
-          .has-below
           .has-below
           .has-below
       .row
