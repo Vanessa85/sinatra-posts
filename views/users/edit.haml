@@ -1,0 +1,25 @@
+.col-md-12
+  %ol.breadcrumb
+    %li
+      %a{href: '/'}
+        %span.glyphicon.glyphicon-home
+    %li
+      %a{href: '/users'} Users
+    %li.active Edit user
+
+.col-md-8.col-md-offset-2
+  .page-header
+    %h1
+      Users
+      %small Edit
+
+  %form{method: 'POST', action: "/users/edit/#{@user.id}" }
+    %input{type: 'hidden', name: 'user[id]', value: @user.id}
+    .form-group
+      %label{for: 'user_name'} Username
+      %input.form-control{type: 'text', name: 'user[name]', id: 'user_name', required: '', value: @user.name}
+    .form-group
+      %label{for: 'user_password'} Password
+      %input.form-control{type: 'password', name: 'user[password]', id: 'user_password'}
+
+    %button.btn.btn-primary{type: 'submit'} Save

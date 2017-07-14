@@ -7,17 +7,26 @@
     %link{rel: 'stylesheet', href:'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity: 'sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin: 'anonymous'}
 
     :css
+      body {
+        padding-top: 60px;
+      }
+      .page-header {
+        margin: 0 0 20px 0;
+      }
+      .breadcrumb {
+        margin: 0;
+      }
       .has-below {
         padding-bottom: 20px;
       }
 
   %body
-    .container-fluid
+    .container
       .row
         .col-md-12
           %nav.navbar.navbar-inverse.navbar-fixed-top{role:'navigation'}
             .navbar-inner
-              .container-fluid
+              .container
                 .navbar-header
                   %button.navbar-toggle{data: {toggle: 'collapse'}}
                     %span.icon-bar
@@ -27,9 +36,9 @@
 
                 .collapse.navbar-collapse#bs-example-navbar-collapse-1
                   %ul.nav.navbar-nav
-                    %li
+                    %li{class: is_link_active?(request, 'users')? 'active' : '' }
                       %a{href: '/users'} Users
-                    %li
+                    %li{class: is_link_active?(request, 'root')? 'active' : '' }
                       %a{href: '/'} Lists
                   - unless session[:user_id].nil?
                     %ul.nav.navbar-nav.navbar-right
@@ -41,8 +50,6 @@
                           %li
                             %a{href: '/logout'} Logout
 
-          .has-below
-          .has-below
       .row
         =yield
 

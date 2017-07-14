@@ -1,17 +1,13 @@
-.col-md-12
-  %ol.breadcrumb
-    %li
-      %a{href: '/'}
-        %span.glyphicon.glyphicon-home
-    %li.active New list
-
 .col-md-8.col-md-offset-2
+  %ol.breadcrumb
+    %li.active Lists
+
   .page-header
     %h1
       Lists
-      %small New
+      %small Edit
 
-  %form{name: 'list', method: 'post', action: '/lists/new'}
+  %form{name: 'list', method: 'post', action: '/lists/edit'}
     .form-group
       %label{for: 'name'} List Name
       %input.form-control{type: 'text', name: 'list[name]', id: 'name', required: '', value: @list.name}

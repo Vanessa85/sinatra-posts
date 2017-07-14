@@ -1,4 +1,10 @@
 .col-md-12
+  %ol.breadcrumb
+    %li
+      %a{href: '/'}
+        %span.glyphicon.glyphicon-home
+    %li.active User
+
   .page-header
     %h1
       Users
@@ -10,12 +16,22 @@
         %th Name
         %th Created at
         %th Updated at
+        %th{colspan: 2} Actions
     %tbody
       - @users.each do |user|
         %tr
           %td= user.name
           %td= user.created_at
           %td= user.updated_at
+          %td
+            %a{href: "/users/edit/#{user.id}"}
+              %span.glyphicon.glyphicon-pencil
+              Edit
+          %td
+            %a{href: "/users/#{user.id}"}
+              %span.glyphicon.glyphicon-trash
+              Remove
+
       - if @users.length == 0
         %tr
           %td.text-center{colspan: 4} No records

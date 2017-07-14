@@ -56,14 +56,37 @@ get '/users' do
   render_view '/users/index'
 end
 
+get '/users/edit/:id/?' do
+  @user = User.find(params[:id])
+  render_view 'users/edit'
+end
+
+post '/users/edit/:id' do
+  @user = User.find(params[:id])
+  if params[:user][:password].empty?
+    params[:user][:password] = @user.password
+  else
+    md5sum = Digest::MD5.hexdigest(params[:user][:password])
+    params[:user][:password] = md5sum
+  end
+
+  if @user.update(params[:user])
+    redirect '/users'
+  else
+    render_view 'users/edit'
+  end
+end
+
 # **** lists ****
 get '/lists/new/?' do
+  @list = List.new
   render_view 'lists/new'
 end
 
 post '/lists/new' do
   user = User.find(session[:user_id])
-  list = List.new_list(params[:name], params[:shared_with], user)
+  @list = List.new_list(params[:list], user)
+  render_view 'lists/new'
   # redirect request.referer
-  redirect '/'
+  # redirect '/'
 end
